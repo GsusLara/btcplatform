@@ -23,10 +23,13 @@
     "@popperjs/core": "^2.10.1",
     "@typescript-eslint/parser": "^4.31.1",
     "@typescript-eslint/typescript-estree": "^4.31.1",
+    "bip32": "^2.0.6",
+    "bitcoinjs-lib": "^5.2.0",
     "bootstrap": "^5.1.0",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-qr-code": "^2.0.2",
     "sass": "^1.41.1",
     "tsutils": "^3.21.0",
     "typescript": "^2.9.2"
