@@ -28,6 +28,10 @@ export default function DemoComponent() {
 
 const Tiquet = () => {
     const { store, actions } = useContext(Context);
+
+    const pagando = (wallet)=>{
+        actions.pagar();
+    }
     
     if (store.direccion.length > 5) {
         return (
@@ -37,7 +41,7 @@ const Tiquet = () => {
             </>
         )
     } else {
-        return <button type="button" className="btn btn-warning mt-2" onClick={()=>actions.pagar()}>Pagar ahora</button>
+        return <button type="button" className="btn btn-warning mt-2" onClick={()=>pagando(store.direccion)}>Pagar ahora</button>
     }
 }
 
