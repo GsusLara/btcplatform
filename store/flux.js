@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			pagar: () => {
-				fetch("http://localhost:3000/api/hello", {
+				fetch("http://localhost:3000/api/facturacion", {
 					method: "GET",
 					headers: { "Content-Type": "application/json" }
 				})

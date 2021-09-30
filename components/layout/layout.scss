@@ -5,5 +5,10 @@
 }
 .Contenido{
     background: #e0e8eb;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 113px);
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
