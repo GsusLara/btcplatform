@@ -26,21 +26,29 @@ export default function DemoComponent() {
 
 const Tiquet = () => {
     const { store, actions } = useContext(Context);
+    let comprobante;
+    let lapso;
 
     const pagando = () => {
         actions.pagar();
-        setTimeout(() => {
-            actions.validarPago
+        store.estadoPago==0?
+        comprobante = setInterval(() => {
+            actions.validarPago(store.direccion);
             console.log(store.estadoPago)
-        }, 5000);
-        
+        }, 30000):
+        limpiar();
+    }
+
+    const limpiar = ()=>{
+        clearInterval(comprobante);
+        actions.clearPago();
     }
 
     if (store.direccion.length > 5) {
         return (
             <div className="col-12 text-center mt-xxl-5">
                 <div className="col-12 col-lg-6 mx-auto text-center">
-                    <QRCode value={store.direccion} bgColor="#e0e8eb"/>
+                    <QRCode value={store.direccion} bgColor="#e0e8eb" />
                 </div>
                 <div className="col-10 col-lg-5 mx-auto text-center ">
                     <div className="position-relative mt-2 mt-xxl-5 hash ">
@@ -68,8 +76,5 @@ const Tiquet = () => {
     }
 }
 
-const loop = ()=>{
-    
-}
 
 

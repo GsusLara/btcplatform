@@ -22,6 +22,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(response => response.json())
 				.then(result => { setStore({ estadoPago: result.final_balance }) })
 				.catch(error => console.log('error', error));
+			},
+			clearPago:()=>{
+				setStore({ direccion: "" })
 			}
 		}
 	};
