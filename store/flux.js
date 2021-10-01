@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			direccion: "",
-			estadoPago:""
+			estadoPago:0
 		},
 		actions: {
 			pagar: () => {
@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log('error', error));
 			},
 			validarPago:(direccion)=>{
-				fetch(`https://blockchain.info/rawaddr/${direccion}`, {
+				fetch(`https://cors-anywhere.herokuapp.com/https://blockchain.info/rawaddr/${direccion}`, {
 					method: "GET",
 					headers: { "Content-Type": "application/json" }
 				})

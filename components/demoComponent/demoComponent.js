@@ -27,8 +27,13 @@ export default function DemoComponent() {
 const Tiquet = () => {
     const { store, actions } = useContext(Context);
 
-    const pagando = (wallet) => {
+    const pagando = () => {
         actions.pagar();
+        setTimeout(() => {
+            actions.validarPago
+            console.log(store.estadoPago)
+        }, 5000);
+        
     }
 
     if (store.direccion.length > 5) {
@@ -56,12 +61,15 @@ const Tiquet = () => {
     } else {
         return (
             <div className="d-grid gap-2 mt-5">
-                <button type="button" className="btn btn-warning mt-2 mx-auto" onClick={() => pagando(store.direccion)}>Pagar ahora</button>
+                <button type="button" className="btn btn-warning mt-2 mx-auto" onClick={() => pagando()}>Pagar ahora</button>
             </div>
 
         )
     }
 }
 
+const loop = ()=>{
+    
+}
 
 
