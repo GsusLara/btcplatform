@@ -13,7 +13,7 @@ export default function DemoComponent() {
     } else if (store.direccion == "pagado") {
         return <Pagado />
     } else {
-        return<Tiquet store={store} />
+        return<Tiquet store={store} actions={actions}/>
     }
 
 }
@@ -29,7 +29,7 @@ const Confirmar = (props) => {
 
                 <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => actions.pagar()}>Pagar ahora</button>
                 <Link href="/">
-                    <a type="button" className="btn btn-danger">Cancelar</a>
+                    <a type="button" className="btn btn-danger" >salir</a>
                 </Link>
             </div>
         </div>
@@ -43,15 +43,15 @@ const Pagado = () => {
 }
 
 const Tiquet = (props) => {
-    const { store } = props
+    const { store, actions } = props;
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 text-center mt-4">
                 <h3>Escanea o copia la dirección de pago</h3>
-                <div className="col-12 col-lg-6 mx-auto mt-3 text-center">
+                <div className="col-12 col-lg-6 mx-auto mt-5 text-center">
                     <QRCode value={store.direccion} bgColor="#e0e8eb" />
                 </div>
-                <div className="col-10 col-lg-5 mx-auto text-center ">
+                <div className="col-10 col-lg-5 col-xxl-4 mx-auto text-center ">
                     <div className="position-relative mt-2 mt-xxl-5 hash ">
                         <div className="p-3">
                             <span>{store.direccion}</span>
@@ -66,7 +66,7 @@ const Tiquet = (props) => {
                     <strong>Esperando la transacción</strong>
                 </div>
                 <Link href="/">
-                    <a type="button" className="btn btn-danger mt-3">Cancelar</a>
+                    <a type="button" className="btn btn-danger mt-3" onClick={()=>actions.clearPago()}>Cancelar</a>
                 </Link>
             </div>
         </div>

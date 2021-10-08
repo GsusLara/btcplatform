@@ -18,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			},
 			clearPago:()=>{
-				setStore({ direccion: "" })
+				setStore({ direccion: "pendiente" })
 			}
 		}
 	};
