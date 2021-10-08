@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			direccion: "",
+			direccion: "pendiente",
 			estadoPago:0
 		},
 		actions: {
@@ -15,13 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log('error', error));
 			},
 			validarPago:(direccion)=>{
-				fetch(`https://cors-anywhere.herokuapp.com/https://blockchain.info/rawaddr/${direccion}`, {
-					method: "GET",
-					headers: { "Content-Type": "application/json" }
-				})
-				.then(response => response.json())
-				.then(result => { setStore({ estadoPago: result.final_balance }) })
-				.catch(error => console.log('error', error));
+				
 			},
 			clearPago:()=>{
 				setStore({ direccion: "" })
