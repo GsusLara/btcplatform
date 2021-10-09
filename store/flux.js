@@ -2,23 +2,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			direccion: "pendiente",
-			estadoPago:0
+			monto: 0
 		},
 		actions: {
-			pagar: () => {
-				fetch("http://localhost:3000/api/facturacion", {
-					method: "GET",
-					headers: { "Content-Type": "application/json" }
-				})
-					.then(response => response.json())
-					.then(result => { setStore({ direccion: result.direccion }) })
-					.catch(error => console.log('error', error));
+			pagar: async () => {
+				const response = await fetch("/api/facturacion")
+				const data = await response.json()
+				setStore({ direccion: data.direccion })
 			},
-			validarPago:(direccion)=>{
-				
+
+
+			validarPago: (recAddr) => {
+				const ws = new WebSocket("wss://ws.blockchain.info/inv");
+				ws.onopen = () => {
+					ws.send(JSON.stringify(
+						{
+							"op": "addr_sub",
+							"addr": recAddr
+						}
+					))
+				}
+				ws.onmessage = (message) => {
+					let response = JSON.parse(message.data);
+					let transacciones = response.x.out;
+					for (let i = 0; i < transacciones.length; i++) {
+						if (transacciones[i].addr == recAddr) {
+							let montoRecibido = transacciones[i].value / 100000000;
+							setStore({ monto: montoRecibido })
+							setStore({ direccion: "pagado" })
+						}
+					}
+				}
 			},
-			clearPago:()=>{
+			limpiarPago: () => {
 				setStore({ direccion: "pendiente" })
+				setStore({ monto: 0 })
 			}
 		}
 	};

@@ -9,9 +9,9 @@ export default function DemoComponent() {
     const { store, actions } = useContext(Context);
 
     if (store.direccion == "pendiente") {
-        return <Confirmar actions={actions}/>
+        return <Confirmar store={store} actions={actions}/>
     } else if (store.direccion == "pagado") {
-        return <Pagado />
+        return <Pagado store={store} actions={actions}/>
     } else {
         return<Tiquet store={store} actions={actions}/>
     }
@@ -20,14 +20,21 @@ export default function DemoComponent() {
 
 
 const Confirmar = (props) => {
-    const { actions } = props
+    const { store, actions } = props
+    const realizarPago = () =>{
+        actions.pagar();
+        setTimeout(() => {
+            actions.validarPago(store.direccion); 
+        }, 3000);
+    }
+
     return (
         <div className="row justify-content-center text-center">
             <div className="col-10 mt-3">
                 <h1 >Realizar pago</h1>
                 <p className="mt-5">Asegurate de tener todo listo para realizar el pago, la direccion será habilitada por 5 minutos</p>
 
-                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => actions.pagar()}>Pagar ahora</button>
+                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => realizarPago()}>Pagar ahora</button>
                 <Link href="/">
                     <a type="button" className="btn btn-danger" >salir</a>
                 </Link>
@@ -36,9 +43,18 @@ const Confirmar = (props) => {
     )
 }
 
-const Pagado = () => {
+const Pagado = (props) => {
+    const {store, actions} = props
     return (
-        <h1>Gracias por tu compra</h1>
+        <div className="row justify-content-center text-center">
+            <div className="col-12 text-center mt-4">
+                 <h1>Gracias por tu compra!!</h1>
+                 <h5>Se recibio un pago por {store.monto} BTC</h5>
+                 <Link href="/">
+                    <a type="button" className="btn btn-primary mt-3" onClick={()=>actions.limpiarPago()}>salir</a>
+                </Link>
+            </div>
+        </div>
     )
 }
 
@@ -63,10 +79,10 @@ const Tiquet = (props) => {
                 </div>
                 <div className="col-10 mt-xxl-3 text-center mx-auto">
                     <span className="spinner-border m-2 align-middle spinner" role="status" />
-                    <strong>Esperando la transacción</strong>
+                    <strong>Esperando la confirmación en la red</strong>
                 </div>
                 <Link href="/">
-                    <a type="button" className="btn btn-danger mt-3" onClick={()=>actions.clearPago()}>Cancelar</a>
+                    <a type="button" className="btn btn-danger mt-3" onClick={()=>actions.limpiarPago()}>Cancelar</a>
                 </Link>
             </div>
         </div>

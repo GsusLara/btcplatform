@@ -20,7 +20,7 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const zpubNode = bip32.fromBase58(zpub, redMainet); // obtiene los datos de la red y crea el zpub en toBase58 - este es seguro no contiene la llave privada.
-    const path = zpubNode.derivePath(`0/15`);//configuracion para poder crear direcciones a partir de llave publica, el ultimo cero es el concecutivo para dorecciones de recepción 
+    const path = zpubNode.derivePath(`0/10`);//configuracion para poder crear direcciones a partir de llave publica, el ultimo cero es el concecutivo para dorecciones de recepción 
     const addr=publicKeyBech32(path);//genera una direccion de recepción 
     res.status(200).json({ direccion: addr})
   } else {
