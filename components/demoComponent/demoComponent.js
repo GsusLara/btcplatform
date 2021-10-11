@@ -30,11 +30,11 @@ const Confirmar = (props) => {
 
     return (
         <div className="row justify-content-center text-center">
-            <div className="col-10 mt-3">
-                <h1 >Realizar pago</h1>
-                <p className="mt-5">Asegurate de tener todo listo para realizar el pago, la direccion será habilitada por 5 minutos</p>
+            <div className="col-12 col-lg-6 mt-3">
+                <h1 >Recibir Bitcoin</h1>
+                <p className="mt-5">Puedes recibir pagos presenciales en BTC sin compartir tus datos personales o cargar saldo a tu cuenta desde otro monedero externo</p>
 
-                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => realizarPago()}>Pagar ahora</button>
+                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => realizarPago()}>Cobrar ahora</button>
                 <Link href="/">
                     <a type="button" className="btn btn-danger" >salir</a>
                 </Link>
