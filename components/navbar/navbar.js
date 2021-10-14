@@ -18,11 +18,13 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <a className="nav-link" aria-current="page" href="#">Pagar</a>
-                        <Link href="/demo">
-                        <a className="nav-link" >Cobrar</a>
+                        <Link href="/Collect">
+                        <a className="nav-link" >Recibir</a>
                         </Link>
                         <a className="nav-link" href="#">Comprar/Vender</a>
-                        <a className="nav-link" href="#">Mercado</a>
+                        <Link href="Market">
+                        <a className="nav-link" >Mercado</a>
+                        </Link>
                         <a className="nav-link" href="#">Noticias</a>
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>

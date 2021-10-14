@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import QRCode from "react-qr-code";
 import Link from "next/link"
 
-export default function DemoComponent() {
+export default function CobrarComponent() {
     const { store, actions } = useContext(Context);
 
     if (store.direccion == "pendiente") {
-        return <Confirmar store={store} actions={actions}/>
+        return <Confirmar store={store} actions={actions} />
     } else if (store.direccion == "pagado") {
-        return <Pagado store={store} actions={actions}/>
+        return <Pagado store={store} actions={actions} />
     } else {
-        return<Tiquet store={store} actions={actions}/>
+        return <Tiquet store={store} actions={actions} />
     }
 
 }
@@ -21,13 +21,12 @@ export default function DemoComponent() {
 
 const Confirmar = (props) => {
     const { store, actions } = props
-    const realizarPago = () =>{
+    const realizarPago = () => {
         actions.pagar();
         setTimeout(() => {
-            actions.validarPago(store.direccion); 
+            actions.validarPago(store.direccion);
         }, 3000);
     }
-
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 col-lg-6 mt-3">
@@ -44,14 +43,20 @@ const Confirmar = (props) => {
 }
 
 const Pagado = (props) => {
-    const {store, actions} = props
+    const { store, actions } = props
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 text-center mt-4">
-                 <h1>Gracias por tu compra!!</h1>
-                 <h5>Se recibio un pago por {store.monto} BTC</h5>
-                 <Link href="/">
-                    <a type="button" className="btn btn-primary mt-3" onClick={()=>actions.limpiarPago()}>salir</a>
+            <h1>¡Pago recibido!</h1>
+                <div className="mt-5">
+                    <h5>Se han cargado a tu cuenta</h5>
+                    <h4><strong>{store.monto} BTC</strong></h4>
+                </div>
+                <div className="mt-3">
+                    ₡ {Math.trunc((store.monto * 57000)*630) } colones
+                </div>
+                <Link href="/">
+                    <a type="button" className="btn btn-primary mt-5" onClick={() => actions.limpiarPago()}>salir</a>
                 </Link>
             </div>
         </div>
@@ -82,7 +87,7 @@ const Tiquet = (props) => {
                     <strong>Esperando la confirmación en la red</strong>
                 </div>
                 <Link href="/">
-                    <a type="button" className="btn btn-danger mt-3" onClick={()=>actions.limpiarPago()}>Cancelar</a>
+                    <a type="button" className="btn btn-danger mt-3" onClick={() => actions.limpiarPago()}>Cancelar</a>
                 </Link>
             </div>
         </div>

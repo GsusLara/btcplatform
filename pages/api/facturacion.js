@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const bitcoin = require('bitcoinjs-lib'); 
 const bip32 = require('bip32');
 
@@ -19,10 +18,10 @@ export default function handler(req, res) {
 
 
   if (req.method === 'GET') {
-    const zpubNode = bip32.fromBase58(zpub, redMainet); // obtiene los datos de la red y crea el zpub en toBase58 - este es seguro no contiene la llave privada.
-    const path = zpubNode.derivePath(`0/10`);//configuracion para poder crear direcciones a partir de llave publica, el ultimo cero es el concecutivo para dorecciones de recepción 
-    const addr=publicKeyBech32(path);//genera una direccion de recepción 
-    res.status(200).json({ direccion: addr})
+    const zpubNode = bip32.fromBase58(zpub, redMainet); 
+    const path = zpubNode.derivePath(`0/11`); 
+    const addr=publicKeyBech32(path);
+    res.status(200).json({ direccion: addr});
   } else {
     res.status(400)
   }
