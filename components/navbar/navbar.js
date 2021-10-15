@@ -22,7 +22,7 @@ export default function Navbar() {
                         <a className="nav-link" >Recibir</a>
                         </Link>
                         <a className="nav-link" href="#">Comprar/Vender</a>
-                        <Link href="Market">
+                        <Link href="/Market">
                         <a className="nav-link" >Mercado</a>
                         </Link>
                         <a className="nav-link" href="#">Noticias</a>
