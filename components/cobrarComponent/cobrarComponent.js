@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { Context } from '../../store/appContext';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import QRCode from "qrcode.react";
 import Link from "next/link"
 
 export default function CobrarComponent() {
@@ -88,8 +87,8 @@ const Tiquet = (props) => {
         <div className="row justify-content-center text-center">
             <div className="col-12 text-center mt-4">
                 <h4>Escanea o copia la dirección de pago</h4>
-                <div className="col-8 col-lg-5 mx-auto mt-4 mt-lg-5 text-center">
-                    <QRCode value={direccion} bgColor="#e0e8eb" />
+                <div className="col-10 col-lg-3 mx-auto text-center qrcode">
+                <img src={`https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=${direccion}`} className="img-fluid p-0" alt="BTC wallet"/>
                 </div>
                 <div className="col-10 col-lg-5 col-xxl-4 mx-auto text-center ">
                     <div className="position-relative mt-2 mt-xxl-5 hash ">

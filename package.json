@@ -15,6 +15,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -23,9 +24,7 @@
     "bip32": "^2.0.6",
     "bitcoinjs-lib": "^5.2.0",
     "bootstrap": "^5.1.0",
-    "depcheck": "^1.4.2",
     "next": "11.1.2",
-    "qrcode.react": "^1.0.1",
     "react": "17.0.2",
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "17.0.2",
