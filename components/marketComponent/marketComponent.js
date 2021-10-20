@@ -1,15 +1,11 @@
-import TradingViewWidget, { Themes } from 'react-tradingview-widget';
-export default function MarketComponent() {
+import dynamic from 'next/dynamic'
 
+export default function MarketComponent() {
+    const Chart = dynamic(import('./chart'),{ssr:false})
     return (
         <div className="row justify-content-center">
             <div className="col-12 grapic">
-                <TradingViewWidget
-                    symbol="COINBASE:BTCUSD"
-                    theme={Themes.DARK}
-                    locale="es"
-                    autosize
-                />
+                <Chart/>
             </div>
         </div>
     )
