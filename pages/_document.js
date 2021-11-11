@@ -8,17 +8,15 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang="es">
+            <Html>
                 <Head>
-                    <meta name="description" content="Plantilla de trabajo" />
+                    <meta name="Compra y venta de BTC bitcoin Costa Rica" content="Bitcoin Costa Rica" />
                     <meta charSet="utf-8" />
-                    <meta name="autor " content="Jesus Lara" />
-                    <link rel="icon" href="/favicon.ico" />
+                    <link rel="icon" href="/btclogo.svg" />
                 </Head>
                 <body>
                     <Main />
                     <NextScript />
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossOrigin="anonymous"></script>
                 </body>
             </Html>
         )
