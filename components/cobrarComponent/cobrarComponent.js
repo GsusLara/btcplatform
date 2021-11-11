@@ -1,16 +1,13 @@
-import { useContext, useState } from "react";
-import { Context } from '../../store/appContext';
+import { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from "next/link"
 
 export default function CobrarComponent() {
-    const { store, actions } = useContext(Context);
     const [direccion, setdireccion] = useState("pendiente");
     const [monto, setmonto] = useState(0);
 
     //actions
-
     const pagar = async () => {
         const response = await fetch("/api/facturacion")
         const data = await response.json()
@@ -33,7 +30,7 @@ export default function CobrarComponent() {
                 if (transacciones[i].addr == recAddr) {
                     let montoRecibido = transacciones[i].value / 100000000;
                     setmonto(montoRecibido);
-                    setdireccion("pagado")
+                    setdireccion("pagado");
                 }
             }
         }
@@ -44,35 +41,27 @@ export default function CobrarComponent() {
     }
 
     //Render
-
     if (direccion == "pendiente") {
-        return <Confirmar direccion={direccion} pagar={pagar} validarPago={validarPago} />
+        return <Confirmar pagar={pagar}  />
     } else if (direccion == "pagado") {
         return <Pagado monto={monto} limpiarPago={limpiarPago} />
     } else {
-        return <Tiquet direccion={direccion} limpiarPago={limpiarPago} />
+        return <Tiquet direccion={direccion} limpiarPago={limpiarPago} validarPago={validarPago}/>
     }
 
 }
 
 
 //Components
-
 const Confirmar = (props) => {
-    const { pagar, validarPago, direccion } = props
-    const realizarPago = () => {
-        pagar();
-        setTimeout(() => {
-            validarPago(direccion);
-        }, 3000);
-    }
+    const { pagar} = props
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 col-lg-6 mt-3">
                 <h1 >Recibir Bitcoin</h1>
                 <p className="mt-5">Puedes recibir pagos presenciales en BTC sin compartir tus datos personales o cargar saldo a tu cuenta desde otro monedero externo</p>
 
-                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => realizarPago()}>Cobrar ahora</button>
+                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => pagar()}>Cobrar ahora</button>
                 <Link href="/">
                     <a type="button" className="btn btn-danger" >salir</a>
                 </Link>
@@ -82,7 +71,12 @@ const Confirmar = (props) => {
 }
 
 const Tiquet = (props) => {
-    const { direccion, limpiarPago } = props;
+    const { direccion, limpiarPago, validarPago } = props;
+    useEffect(() => {
+        setTimeout(() => {
+            validarPago(direccion);
+        }, 2000);
+    }, [])
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 text-center mt-4">
