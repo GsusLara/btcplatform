@@ -19,7 +19,7 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const zpubNode = bip32.fromBase58(zpub, redMainet); 
-    const path = zpubNode.derivePath(`0/19`); 
+    const path = zpubNode.derivePath(`0/6`); 
     const addr=publicKeyBech32(path);
     res.status(200).json({ direccion: addr});
   } else {

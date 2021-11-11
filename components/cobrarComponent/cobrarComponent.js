@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../../store/appContext";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from "next/link"
 
 export default function CobrarComponent() {
+    const { store} = useContext(Context);
     const [direccion, setdireccion] = useState("pendiente");
     const [monto, setmonto] = useState(0);
 
@@ -44,7 +46,7 @@ export default function CobrarComponent() {
     if (direccion == "pendiente") {
         return <Confirmar pagar={pagar}  />
     } else if (direccion == "pagado") {
-        return <Pagado monto={monto} limpiarPago={limpiarPago} />
+        return <Pagado monto={monto} limpiarPago={limpiarPago} store={store}/>
     } else {
         return <Tiquet direccion={direccion} limpiarPago={limpiarPago} validarPago={validarPago}/>
     }
@@ -107,7 +109,7 @@ const Tiquet = (props) => {
 }
 
 const Pagado = (props) => {
-    const { monto, limpiarPago } = props
+    const { monto, limpiarPago, store } = props
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 text-center mt-4">
@@ -117,7 +119,7 @@ const Pagado = (props) => {
                     <h4><strong>{monto} BTC</strong></h4>
                 </div>
                 <div className="mt-3">
-                    ₡ {Math.trunc((monto * 57000) * 630)} colones
+                    ₡ {Math.trunc(monto * store.tcBtc)} colones
                 </div>
                 <Link href="/">
                     <a type="button" className="btn btn-primary mt-5" onClick={() => limpiarPago()}>salir</a>

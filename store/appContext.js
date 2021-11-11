@@ -1,4 +1,4 @@
-import {createContext, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
 import getState from "./flux.js";
 
 export const Context = createContext(null);
@@ -16,6 +16,9 @@ const injectContext = PassedComponent => {
 					})
 			})
 		);
+		useEffect(() => {
+			state.actions.updateCambios();
+		}, []);
         return (
 			<Context.Provider value={state}>
 				<PassedComponent {...props} />
