@@ -1,27 +1,29 @@
 const bip32 = require('bip32')
-const bitcoin = require('bitcoinjs-lib'); 
+const bitcoin = require('bitcoinjs-lib');
 
 export default function handler(req, res) {
-  const zpub = process.env.ZPUBLIC;
+  const zpub = [process.env.ZPUB1, process.env.ZPUB2];
+  let pubkeys = [];
   const redMainet = Object.assign({}, bitcoin.networks.bitcoin,
     {
       bip32: {
-        public: 0x04b24746, 
-        private: 0x04b2430c, 
+        public: 0x02aa7ed3,
+        private: 0x02aa7a99,
       },
     },
   );
-  const publicKeyBech32 = llave => {
-    const { address } = bitcoin.payments.p2wpkh({ pubkey: llave.publicKey });
-    return address;
-  };
-
 
   if (req.method === 'GET') {
-    const zpubNode = bip32.fromBase58(zpub, redMainet); 
-    const path = zpubNode.derivePath(`0/6`); 
-    const addr=publicKeyBech32(path);
-    res.status(200).json({ direccion: addr});
+    for (let i = 0; i < 2; i++) {
+      const zpubNode = bip32.fromBase58(zpub[i], redMainet);
+      const path = zpubNode.derivePath(`0/0`);
+      pubkeys.push(path.publicKey)
+    }
+    pubkeys.sort((a, b) => a.compare(b));
+    const { address } = bitcoin.payments.p2wsh({
+      redeem: bitcoin.payments.p2ms({ m: 2, pubkeys }),
+    });
+    res.status(200).json({ direccion: address });
   } else {
     res.status(400)
   }
