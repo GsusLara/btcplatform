@@ -60,10 +60,10 @@ const Confirmar = (props) => {
     return (
         <div className="row justify-content-center text-center">
             <div className="col-12 col-lg-6 mt-3">
-                <h1 >Recibir Bitcoin</h1>
-                <p className="mt-5">Puedes recibir pagos presenciales en BTC sin compartir tus datos personales o cargar saldo a tu cuenta desde otro monedero externo</p>
+                <h1 >Cambia tus BTC por colones</h1>
+                <p className="mt-5">El cambio de bitcoin tiene un plazo de acreditación de hasta 24 horas para su verificacion segun la disponibilidad de la red</p>
 
-                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => pagar()}>Cobrar ahora</button>
+                <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => pagar()}>Cambiar ahora</button>
                 <Link href="/">
                     <a type="button" className="btn btn-danger" >salir</a>
                 </Link>
@@ -115,10 +115,11 @@ const Pagado = (props) => {
             <div className="col-12 text-center mt-4">
                 <h1>¡Pago recibido!</h1>
                 <div className="mt-5">
-                    <h5>Se han cargado a tu cuenta</h5>
+                    <h5>Se han recibido</h5>
                     <h4><strong>{monto} BTC</strong></h4>
                 </div>
                 <div className="mt-3">
+                    <h5>Se enviarán a tu cuenta bancaria</h5>
                     ₡ {Math.trunc(monto * store.tcBtc)} colones
                 </div>
                 <Link href="/">

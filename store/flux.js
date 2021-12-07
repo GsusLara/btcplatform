@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 		fecha:"",
-		tcBtc:0	
+		tcBtc:0,
+		historico:[]	
 		},
 		actions: {
 			updateCambios:async()=>{
@@ -40,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					throw e;
 				}
 				setStore({fecha:dolar.fecha});
-				setStore({tcBtc: dolar.venta*btc.bitcoin.usd});
+				setStore({tcBtc: dolar.compra*btc.bitcoin.usd});
 			}
 		}
 	};

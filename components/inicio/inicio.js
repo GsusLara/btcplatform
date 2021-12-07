@@ -3,6 +3,7 @@ import { Context } from "../../store/appContext";
 
 export default function Inicio() {
     const { store} = useContext(Context);
+    console.log(store.historico);
     return (
         <div className="row justify-content-center">
             <div className="col-6 mt-5 text-center">

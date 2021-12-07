@@ -17,15 +17,14 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-link" aria-current="page" href="#">Pagar</a>
+                        <a className="nav-link" aria-current="page" href="#">Mi cuenta</a>
                         <Link href="/Collect">
-                        <a className="nav-link" >Recibir</a>
+                        <a className="nav-link" >Vender BTC</a>
                         </Link>
-                        <a className="nav-link" href="#">Comprar/Vender</a>
+                        <a className="nav-link" href="#">Comprar BTC</a>
                         <Link href="/Market">
                         <a className="nav-link" >Mercado</a>
                         </Link>
-                        <a className="nav-link" href="#">Noticias</a>
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
                 </div>
