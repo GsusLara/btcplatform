@@ -25,6 +25,7 @@
     "bip32": "^2.0.6",
     "bitcoinjs-lib": "^5.2.0",
     "bootstrap": "^5.1.0",
+    "firebase": "^9.6.0",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-copy-to-clipboard": "^5.0.4",
