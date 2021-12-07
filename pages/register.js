@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { createUserWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../firebase"
+import { auth } from "../store/firebase"
 import { useRouter } from 'next/router'
 
 export default function Register() {
