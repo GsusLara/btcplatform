@@ -2,8 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 		fecha:"",
-		tcBtc:0,
-		historico:[]	
+		tcBtc:0	
 		},
 		actions: {
 			updateCambios:async()=>{
