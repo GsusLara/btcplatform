@@ -1,6 +1,18 @@
 .company{
     color:#fe9316
 }
+.navbar-toggler{
+    border: none;
+}
 .loginButton{
     cursor: pointer;
+}
+.closeButton{
+    cursor: pointer;
+    text-decoration: none;
+    color:#FE9316;
+
+    &:hover{
+        color:gray
+    }
 }

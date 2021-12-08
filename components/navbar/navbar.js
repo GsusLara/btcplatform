@@ -2,8 +2,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from "next/link"
 import logo from "../../public/btclogo.svg"
-import { Button, Modal, Form } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import Login from '../login';
+import { auth } from "../../store/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth"
 
 
 export default function Navbar() {
@@ -11,6 +13,15 @@ export default function Navbar() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    onAuthStateChanged(auth, (usuarioFirebase) => {
+        if (usuarioFirebase) {
+            setShow(false)
+            setlogueado(true);
+        } else {
+            setlogueado(false)
+        }
+    })
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,11 +52,13 @@ export default function Navbar() {
                         }
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
+                    <div className="collapse navbar-collapse" />
+                    <a className="nav-link closeButton">cerrar sesión</a>
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton/>
-                <Login/>
+                <Modal.Header closeButton />
+                <Login />
             </Modal>
         </nav>
     )
