@@ -5,7 +5,7 @@ import logo from "../../public/btclogo.svg"
 import { Modal } from "react-bootstrap";
 import Login from '../login';
 import { auth } from "../../store/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth"
+import { onAuthStateChanged, signOut } from "firebase/auth"
 
 
 export default function Navbar() {
@@ -53,7 +53,7 @@ export default function Navbar() {
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
                     <div className="collapse navbar-collapse" />
-                    <a className="nav-link closeButton">cerrar sesión</a>
+                    <a className="nav-link closeButton" onClick={()=>signOut(auth)} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a>
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>

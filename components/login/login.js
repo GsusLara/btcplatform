@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth } from "../../store/firebaseConfig"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 
 
 export default function Login() {
@@ -38,9 +38,9 @@ export default function Login() {
             alert("email o password invalido")
         } else if (conCuenta) {
             iniciaUser()
-        }else if (credentials.password !== credentials.password2){
+        } else if (credentials.password !== credentials.password2) {
             alert("las contraseñas no coinciden")
-        }else {
+        } else {
             registerUser();
         }
     }
@@ -67,6 +67,11 @@ export default function Login() {
                                 className="form-control"
                                 placeholder="Email address"
                                 onChange={changeUser}
+                                onKeyPress={e => {
+                                    if (e.key == "Enter") {
+                                        verificar();
+                                    }
+                                }}
                             />
                         </div>
                         <div className="input-group mb-3">
@@ -78,6 +83,11 @@ export default function Login() {
                                 className="form-control"
                                 placeholder={conCuenta ? "password" : "contraseña superior a 8 digitos"}
                                 onChange={changeUser}
+                                onKeyPress={e => {
+                                    if (e.key == "Enter") {
+                                        verificar();
+                                    }
+                                }}
                             />
                         </div>
                         <div style={{ display: conCuenta ? "none" : "block" }}>
@@ -90,6 +100,11 @@ export default function Login() {
                                     className="form-control"
                                     placeholder="confirme su contraseña"
                                     onChange={changeUser}
+                                    onKeyPress={e => {
+                                        if (e.key == "Enter") {
+                                            verificar();
+                                        }
+                                    }}
                                 />
                             </div>
                         </div>
