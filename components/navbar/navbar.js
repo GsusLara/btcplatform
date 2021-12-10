@@ -39,7 +39,9 @@ export default function Navbar() {
                     <div className="navbar-nav">
                         {logueado ?
                             <>
-                                <a className="nav-link" aria-current="page" href="#">Mi cuenta</a>
+                            <Link href="/Cuenta">
+                                <a className="nav-link" aria-current="page">Mi cuenta</a>
+                                </Link>
                                 <Link href="/Collect">
                                     <a className="nav-link" >Vender BTC</a>
                                 </Link>

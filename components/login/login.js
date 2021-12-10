@@ -2,11 +2,12 @@ import { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth } from "../../store/firebaseConfig"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithRedirect, GoogleAuthProvider } from "firebase/auth"
 
 
 export default function Login() {
     const { store, actions } = useContext(Context);
+    const googleProvider = new GoogleAuthProvider();
     const [conCuenta, setconCuenta] = useState(true);
     const [credentials, setcredentials] = useState({ email: "", password: "", password2: "" });
     const revisionEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,10 +49,8 @@ export default function Login() {
         <div className="bg-light text-center">
             <article className="card-body mx-auto" style={{ maxWidth: "400px" }}>
                 <h4 className="card-title text-center fs-3">{conCuenta ? "Iniciar sesión" : "Crear cuenta"}</h4>
-                <p className="text-center">utiliza tu cuenta preferida</p>
-                <div className="d-grid gap-2">
-                    <button className="btn btn-danger"> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Inicia con Google</button>
-                    <button className="btn btn-primary"> <FontAwesomeIcon icon={["fab", "facebook-f"]} /> &nbsp; Inicia con facebook</button>
+                <div className="d-grid gap-2 mt-4">
+                    <button className="btn btn-danger" onClick={()=>signInWithRedirect(auth, googleProvider)}> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Utiliza tu cuenta de Google</button>
                 </div>
                 <p className="divider-text mt-3">
                     <span className="bg-light">ó</span>
