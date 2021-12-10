@@ -2,23 +2,54 @@ import React from 'react'
 
 export default function CuentaComponent() {
     return (
-        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
-            <div className="card p-4">
-                <div className=" image d-flex flex-column justify-content-center align-items-center">
-                    <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-                    <span className="mt-3 mx-5">nombre@mail.com</span> 
-                    <span className="fw-bold mt-3">Datos personales:</span>
-                    <span>Nombre</span>
-                    <span>ID</span>
-                    <span>Fecha de Nacimiento</span>
-                    <span className="fw-bold mt-3">Datos de venta</span>
-                    <span>Banco</span>
-                    <span>Iban</span>
-                    <div className=" d-flex mt-5"> 
-                    <button className="btn1 btn-dark">Edit Profile</button> 
-                    
+        <div className="container rounded bg-white mb-5">
+            <div className="row">
+                <div className="col-md-3 border-right">
+                    <div className="d-flex flex-column align-items-center text-center p-3 "><img className="rounded-circle " width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span className="text-black-50">edogaru@mail.com</span><span> </span></div>
+                </div>
+                <div className="col-md-5 border-right">
+                    <div className="p-3 py-5">
+                        <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h4 className="text-right">Configuración de perfil</h4>
+                        </div>
+                        <div className="row mt-2">
+                            <div className="col-md-6"><label className="labels">Nombre</label><input type="text" className="form-control" placeholder="Ingrese su nombre" defaultValue="" /></div>
+                            <div className="col-md-6"><label className="labels">Apellidos</label><input type="text" className="form-control" placeholder="Ingrese sus Apellidos" defaultValue="" /></div>
+                            <div className="col-md-6"><label className="labels">Número de ID</label><input type="text" className="form-control" placeholder="Cedula u otra ID" defaultValue="" /></div>
+                        </div>
+                        <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
+                            <h4 className="text-right">Información bancaria</h4>
+                        </div>
+                        <div className="row mt-3">
+                            <div className="col-md-12"><label className="labels mt-1">Entidad bancaria</label><input type="text" className="form-control" placeholder="Nombre del Banco" defaultValue="" /></div>
+                            <div className="col-md-12"><label className="labels mt-1">Cuenta Iban</label><input type="text" className="form-control" placeholder="Numero de cuenta Iban" defaultValue="" /></div>
+                            <div className="col-md-12"><label className="labels mt-1">Titular de la cuenta</label><input type="text" className="form-control" placeholder="Nombre del titular de la cuenta bancaria" defaultValue="" /></div>
+                        </div>
+                        <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
+                            <h4 className="text-right">Validación de cuenta</h4>
+                        </div>
+                        <div className="row mt-3">
+                            <div className="col-md-12"><label className="labels">Documento de identidad</label><input type="file" className="form-control" /></div>
+                        </div>
+                        <div className="mt-5 text-center"><button className="btn btn-primary profile-button" type="button">Save Profile</button></div>
                     </div>
-                    
+                </div>
+                <div className="col-md-4">
+                    <div className="p-3 py-5">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h4 className="text-right">Historial de transacciones</h4>
+                        </div>
+                        <div className="card">
+                            <div className="p-3">
+                                <h3 className="card-title">venta</h3>
+                                <h6 className="card-subtitle mb-2 text-muted">Finalizada</h6>
+                                <p className="card-text">
+                                    bcr-305105442154000 <br />
+                                    14-12-2021 <br />
+                                    ₡35000</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,9 +6,11 @@ import { Modal } from "react-bootstrap";
 import Login from '../login';
 import { auth } from "../../store/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth"
+import { useRouter } from 'next/router'
 
 
 export default function Navbar() {
+    const {push} = useRouter();
     const [logueado, setlogueado] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -16,12 +18,16 @@ export default function Navbar() {
 
     onAuthStateChanged(auth, (usuarioFirebase) => {
         if (usuarioFirebase) {
-            setShow(false)
             setlogueado(true);
+            setShow(false);
         } else {
             setlogueado(false)
         }
     })
+    const salir = ()=>{
+        signOut(auth);
+        push("/");
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,7 +61,7 @@ export default function Navbar() {
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
                     <div className="collapse navbar-collapse" />
-                    <a className="nav-link closeButton" onClick={()=>signOut(auth)} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a>
+                    <a className="nav-link closeButton" onClick={()=>salir()} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a>
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>
