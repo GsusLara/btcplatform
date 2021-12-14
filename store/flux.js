@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			fecha: "",
 			tcBtc: 0,
-			user: "",
+			user: [],
 		},
 		actions: {
 			updateCambios: async () => {
@@ -46,6 +46,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: (data) => {
 				const { email, photoURL, uid } = data
 				setStore({ user: [uid, email, photoURL] });
+			},
+			logout:()=>{
+				setStore({user:[]})
 			}
 		}
 	};

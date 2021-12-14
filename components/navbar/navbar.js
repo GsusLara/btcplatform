@@ -22,6 +22,7 @@ export default function Navbar() {
         signOut(auth);
         push("/");
         setlogueado(false);
+        actions.logout();
     }
     
     useEffect(() => {
