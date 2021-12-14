@@ -1,12 +1,10 @@
-import { useState, useContext } from "react";
-import { Context } from "../../store/appContext";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth } from "../../store/firebaseConfig"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithRedirect, GoogleAuthProvider } from "firebase/auth"
 
 
 export default function Login() {
-    const { store, actions } = useContext(Context);
     const googleProvider = new GoogleAuthProvider();
     const [conCuenta, setconCuenta] = useState(true);
     const [credentials, setcredentials] = useState({ email: "", password: "", password2: "" });
@@ -45,12 +43,13 @@ export default function Login() {
             registerUser();
         }
     }
+
     return (
         <div className="bg-light text-center">
             <article className="card-body mx-auto" style={{ maxWidth: "400px" }}>
                 <h4 className="card-title text-center fs-3">{conCuenta ? "Iniciar sesión" : "Crear cuenta"}</h4>
                 <div className="d-grid gap-2 mt-4">
-                    <button className="btn btn-danger" onClick={()=>signInWithRedirect(auth, googleProvider)}> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Utiliza tu cuenta de Google</button>
+                    <button className="btn btn-danger" onClick={() => signInWithRedirect(auth, googleProvider)}> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Utiliza tu cuenta de Google</button>
                 </div>
                 <p className="divider-text mt-3">
                     <span className="bg-light">ó</span>

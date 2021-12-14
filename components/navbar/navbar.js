@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { Context } from "../../store/appContext";
 import Image from 'next/image'
 import Link from "next/link"
 import logo from "../../public/btclogo.svg"
@@ -10,24 +11,31 @@ import { useRouter } from 'next/router'
 
 
 export default function Navbar() {
+    const { actions } = useContext(Context);
     const {push} = useRouter();
     const [logueado, setlogueado] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    onAuthStateChanged(auth, (usuarioFirebase) => {
-        if (usuarioFirebase) {
-            setlogueado(true);
-            setShow(false);
-        } else {
-            setlogueado(false)
-        }
-    })
     const salir = ()=>{
         signOut(auth);
         push("/");
+        setlogueado(false);
     }
+    
+    useEffect(() => {
+        const unsuscibe= onAuthStateChanged(auth, (usuarioFirebase) => {
+            if (usuarioFirebase){
+                actions.login(usuarioFirebase);
+                setlogueado(true);
+                setShow(false);
+            }
+        })
+        return () => {
+            unsuscibe()
+        }
+    }, [])
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
