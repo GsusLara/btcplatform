@@ -5,6 +5,7 @@ import { getFirestore } from "firebase/firestore"
 
 export default function CuentaComponent() {
     const { store } = useContext(Context);
+    
     return (
         <div className="container rounded bg-white mb-5">
             <div className="row">

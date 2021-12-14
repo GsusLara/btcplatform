@@ -70,7 +70,8 @@ export default function Navbar() {
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
                     <div className="collapse navbar-collapse" />
-                    <a className="nav-link closeButton" onClick={()=>salir()} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a>
+                    {/* <a className="nav-link closeButton" onClick={()=>salir()} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a> */}
+                   {logueado && <a className="nav-link closeButton" onClick={()=>salir()}>cerrar sesión</a>}
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>
