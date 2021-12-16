@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import { Context } from "../../store/appContext";
-import { db } from "../../store/firebaseConfig"
-import { getFirestore } from "firebase/firestore"
+import { db } from "../../store/firebaseConfig";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function CuentaComponent() {
     const { store } = useContext(Context);
+    console.log(store.perfilUser)
     
     return (
         <div className="container rounded bg-white mb-5">
             <div className="row">
                 <div className="col-md-3 border-right">
-                    <div className="d-flex flex-column align-items-center text-center p-3 "><img className="rounded-circle " width="150px" src={store.user[2]?store.user[2]:"/perfil.png"}/><span className="text-black-50">{store.user[1]}</span><span> </span></div>
+                    <div className="d-flex flex-column align-items-center text-center p-3 "><img className="rounded-circle " width="150px" src={store.user[2] ? store.user[2] : "/perfil.png"} /><span className="text-black-50">{store.user[1]}</span><span> </span></div>
                 </div>
                 <div className="col-md-5 border-right">
                     <div className="p-3 py-5">
@@ -18,7 +19,7 @@ export default function CuentaComponent() {
                             <h4 className="text-right">Configuración de perfil</h4>
                         </div>
                         <div className="row mt-2">
-                            <div className="col-md-6"><label className="labels">Nombre</label><input type="text" className="form-control" placeholder="Ingrese su nombre" defaultValue=""/></div>
+                            <div className="col-md-6"><label className="labels">Nombre</label><input type="text" className="form-control" placeholder="Ingrese su nombre" defaultValue="" /></div>
                             <div className="col-md-6"><label className="labels">Apellidos</label><input type="text" className="form-control" placeholder="Ingrese sus Apellidos" defaultValue="" /></div>
                             <div className="col-md-6"><label className="labels">Número de ID</label><input type="text" className="form-control" placeholder="Cedula u otra ID" defaultValue="" /></div>
                         </div>

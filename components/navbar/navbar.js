@@ -8,28 +8,41 @@ import Login from '../login';
 import { auth } from "../../store/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useRouter } from 'next/router'
+import { db } from "../../store/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 
 export default function Navbar() {
     const { actions } = useContext(Context);
-    const {push} = useRouter();
+    const { push } = useRouter();
     const [logueado, setlogueado] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const salir = ()=>{
+    const salir = () => {
         signOut(auth);
         push("/");
         setlogueado(false);
         actions.logout();
     }
-    
+
+    async function accesoInfo(usuarioId) {
+        const refInfo = doc(db, `dataUsers/${usuarioId}`);
+        const consulta = await getDoc(refInfo);
+        if (consulta.exists()) {
+            actions.getPerfilUser(consulta.data())
+        } else {
+            return false
+        }
+    }
+
     useEffect(() => {
-        const unsuscibe= onAuthStateChanged(auth, (usuarioFirebase) => {
-            if (usuarioFirebase){
-                actions.login(usuarioFirebase);
+        const unsuscibe = onAuthStateChanged(auth, (usuarioFirebase) => {
+            if (usuarioFirebase) {
                 setlogueado(true);
+                actions.login(usuarioFirebase);
+                accesoInfo(usuarioFirebase.uid);
                 setShow(false);
             }
         })
@@ -54,8 +67,8 @@ export default function Navbar() {
                     <div className="navbar-nav">
                         {logueado ?
                             <>
-                            <Link href="/Cuenta">
-                                <a className="nav-link" aria-current="page">Mi cuenta</a>
+                                <Link href="/Cuenta">
+                                    <a className="nav-link" aria-current="page">Mi cuenta</a>
                                 </Link>
                                 <Link href="/Collect">
                                     <a className="nav-link" >Vender BTC</a>
@@ -71,7 +84,7 @@ export default function Navbar() {
                     </div>
                     <div className="collapse navbar-collapse" />
                     {/* <a className="nav-link closeButton" onClick={()=>salir()} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a> */}
-                   {logueado && <a className="nav-link closeButton" onClick={()=>salir()}>cerrar sesión</a>}
+                    {logueado && <a className="nav-link closeButton" onClick={() => salir()}>cerrar sesión</a>}
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>
