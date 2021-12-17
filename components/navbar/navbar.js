@@ -9,7 +9,7 @@ import { auth } from "../../store/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useRouter } from 'next/router'
 import { db } from "../../store/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 export default function Navbar() {
@@ -33,7 +33,9 @@ export default function Navbar() {
         if (consulta.exists()) {
             actions.getPerfilUser(consulta.data())
         } else {
-            return false
+            setDoc(refInfo, {datos:false})
+            const consulta = await getDoc(refInfo);
+            actions.getPerfilUser(consulta.data())
         }
     }
 

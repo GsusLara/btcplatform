@@ -1,12 +1,26 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
 import { db } from "../../store/firebaseConfig";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function CuentaComponent() {
-    const { store } = useContext(Context);
-    console.log(store.perfilUser)
-    
+    const { store, actions } = useContext(Context);
+    const [info, setInfo] = useState({ datos: true, nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" });
+
+    const infoUser = (e) => {
+        setInfo({
+            ...info,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    async function actualizarInfo(userId) {
+        const refInfo = doc(db, `dataUsers/${userId}`);
+        setDoc(refInfo, info)
+        const consulta = await getDoc(refInfo);
+        actions.getPerfilUser(consulta.data())
+    }
+
     return (
         <div className="container rounded bg-white mb-5">
             <div className="row">
@@ -19,17 +33,71 @@ export default function CuentaComponent() {
                             <h4 className="text-right">Configuración de perfil</h4>
                         </div>
                         <div className="row mt-2">
-                            <div className="col-md-6"><label className="labels">Nombre</label><input type="text" className="form-control" placeholder="Ingrese su nombre" defaultValue="" /></div>
-                            <div className="col-md-6"><label className="labels">Apellidos</label><input type="text" className="form-control" placeholder="Ingrese sus Apellidos" defaultValue="" /></div>
-                            <div className="col-md-6"><label className="labels">Número de ID</label><input type="text" className="form-control" placeholder="Cedula u otra ID" defaultValue="" /></div>
+                            <div className="col-md-6"><label className="labels">Nombre</label>
+                                <input
+                                    type="text"
+                                    onChange={infoUser}
+                                    name="nombre"
+                                    className="form-control"
+                                    placeholder="Ingrese su nombre"
+                                    defaultValue={store.perfilUser[0].nombre?store.perfilUser[0].nombre:""}
+                                />
+                            </div>
+                            <div className="col-md-6"><label className="labels">Apellidos</label>
+                                <input
+                                    type="text"
+                                    onChange={infoUser}
+                                    name="apellidos"
+                                    className="form-control"
+                                    placeholder="Ingrese sus Apellidos"
+                                    defaultValue={store.perfilUser[0].apellidos?store.perfilUser[0].apellidos:""}
+                                />
+                            </div>
+                            <div className="col-md-6"><label className="labels">Número de ID</label>
+                                <input
+                                    type="text"
+                                    onChange={infoUser}
+                                    name="cedula"
+                                    className="form-control"
+                                    placeholder="Cedula u otra ID"
+                                    defaultValue={store.perfilUser[0].cedula?store.perfilUser[0].cedula:""}
+                                />
+                            </div>
                         </div>
                         <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
                             <h4 className="text-right">Información bancaria</h4>
                         </div>
                         <div className="row mt-3">
-                            <div className="col-md-12"><label className="labels mt-1">Entidad bancaria</label><input type="text" className="form-control" placeholder="Nombre del Banco" defaultValue="" /></div>
-                            <div className="col-md-12"><label className="labels mt-1">Cuenta Iban</label><input type="text" className="form-control" placeholder="Numero de cuenta Iban" defaultValue="" /></div>
-                            <div className="col-md-12"><label className="labels mt-1">Titular de la cuenta</label><input type="text" className="form-control" placeholder="Nombre del titular de la cuenta bancaria" defaultValue="" /></div>
+                            <div className="col-md-12"><label className="labels mt-1">Entidad bancaria</label>
+                                <input
+                                    type="text"
+                                    onChange={infoUser}
+                                    name="banco"
+                                    className="form-control"
+                                    placeholder="Nombre del Banco"
+                                    defaultValue={store.perfilUser[0].banco?store.perfilUser[0].banco:""}
+                                />
+                            </div>
+                            <div className="col-md-12"><label className="labels mt-1">Cuenta Iban</label>
+                                <input
+                                    type="text"
+                                    onChange={infoUser}
+                                    name="cuenta"
+                                    className="form-control"
+                                    placeholder="Numero de cuenta Iban"
+                                    defaultValue={store.perfilUser[0].cuenta?store.perfilUser[0].cuenta:""}
+                                />
+                            </div>
+                            <div className="col-md-12"><label className="labels mt-1">Titular de la cuenta</label>
+                                <input
+                                    type="text"
+                                    onChange={infoUser}
+                                    name="nombreCuenta"
+                                    className="form-control"
+                                    placeholder="Nombre del titular de la cuenta bancaria"
+                                    defaultValue={store.perfilUser[0].nombreCuenta?store.perfilUser[0].nombreCuenta:""}
+                                />
+                            </div>
                         </div>
                         <div className="d-flex justify-content-between align-items-center mb-3 mt-3">
                             <h4 className="text-right">Validación de cuenta</h4>
@@ -37,7 +105,14 @@ export default function CuentaComponent() {
                         <div className="row mt-3">
                             <div className="col-md-12"><label className="labels">Documento de identidad</label><input type="file" className="form-control" /></div>
                         </div>
-                        <div className="mt-5 text-center"><button className="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                        <div className="mt-5 text-center">
+                            <button
+                                className="btn btn-primary"
+                                type="button"
+                                onClick={() => actualizarInfo(store.user[0])}>
+                                Save Profile
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-4">
