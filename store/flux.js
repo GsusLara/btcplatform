@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fecha: "",
 			tcBtc: 0,
 			user: false,
-			perfilUser:""
+			perfilUser:[{ nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" }]
 		},
 		actions: {
 			updateCambios: async () => {
@@ -49,7 +49,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ user: [uid, email, photoURL] });
 			},
 			logout:()=>{
-				setStore({user:false})
+				setStore({user:false});
+				setStore({perfilUser:[{ nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" }]})
 			},
 			getPerfilUser:(data)=>{
 				setStore({perfilUser:[data]})

@@ -1,11 +1,18 @@
 import { useState, useContext } from "react";
 import { Context } from "../../store/appContext";
 import { db } from "../../store/firebaseConfig";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function CuentaComponent() {
-    const { store, actions } = useContext(Context);
-    const [info, setInfo] = useState({ datos: true, nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" });
+    const { store } = useContext(Context);
+    const [info, setInfo] = useState({
+        nombre: store.perfilUser[0].nombre,
+        apellidos: store.perfilUser[0].apellidos,
+        cedula: store.perfilUser[0].cedula,
+        banco: store.perfilUser[0].banco,
+        cuenta: store.perfilUser[0].cuenta,
+        nombreCuenta: store.perfilUser[0].nombreCuenta
+    });
 
     const infoUser = (e) => {
         setInfo({
@@ -16,9 +23,8 @@ export default function CuentaComponent() {
 
     async function actualizarInfo(userId) {
         const refInfo = doc(db, `dataUsers/${userId}`);
-        setDoc(refInfo, info)
-        const consulta = await getDoc(refInfo);
-        actions.getPerfilUser(consulta.data())
+        setDoc(refInfo, info);
+        alert("Datos actualizados con exito");
     }
 
     return (
@@ -40,7 +46,7 @@ export default function CuentaComponent() {
                                     name="nombre"
                                     className="form-control"
                                     placeholder="Ingrese su nombre"
-                                    defaultValue={store.perfilUser[0].nombre?store.perfilUser[0].nombre:""}
+                                    defaultValue={store.perfilUser[0].nombre ? store.perfilUser[0].nombre : ""}
                                 />
                             </div>
                             <div className="col-md-6"><label className="labels">Apellidos</label>
@@ -50,7 +56,7 @@ export default function CuentaComponent() {
                                     name="apellidos"
                                     className="form-control"
                                     placeholder="Ingrese sus Apellidos"
-                                    defaultValue={store.perfilUser[0].apellidos?store.perfilUser[0].apellidos:""}
+                                    defaultValue={store.perfilUser[0].apellidos ? store.perfilUser[0].apellidos : ""}
                                 />
                             </div>
                             <div className="col-md-6"><label className="labels">Número de ID</label>
@@ -60,7 +66,7 @@ export default function CuentaComponent() {
                                     name="cedula"
                                     className="form-control"
                                     placeholder="Cedula u otra ID"
-                                    defaultValue={store.perfilUser[0].cedula?store.perfilUser[0].cedula:""}
+                                    defaultValue={store.perfilUser[0].cedula ? store.perfilUser[0].cedula : ""}
                                 />
                             </div>
                         </div>
@@ -75,7 +81,7 @@ export default function CuentaComponent() {
                                     name="banco"
                                     className="form-control"
                                     placeholder="Nombre del Banco"
-                                    defaultValue={store.perfilUser[0].banco?store.perfilUser[0].banco:""}
+                                    defaultValue={store.perfilUser[0].banco ? store.perfilUser[0].banco : ""}
                                 />
                             </div>
                             <div className="col-md-12"><label className="labels mt-1">Cuenta Iban</label>
@@ -85,7 +91,7 @@ export default function CuentaComponent() {
                                     name="cuenta"
                                     className="form-control"
                                     placeholder="Numero de cuenta Iban"
-                                    defaultValue={store.perfilUser[0].cuenta?store.perfilUser[0].cuenta:""}
+                                    defaultValue={store.perfilUser[0].cuenta ? store.perfilUser[0].cuenta : ""}
                                 />
                             </div>
                             <div className="col-md-12"><label className="labels mt-1">Titular de la cuenta</label>
@@ -95,7 +101,7 @@ export default function CuentaComponent() {
                                     name="nombreCuenta"
                                     className="form-control"
                                     placeholder="Nombre del titular de la cuenta bancaria"
-                                    defaultValue={store.perfilUser[0].nombreCuenta?store.perfilUser[0].nombreCuenta:""}
+                                    defaultValue={store.perfilUser[0].nombreCuenta ? store.perfilUser[0].nombreCuenta : ""}
                                 />
                             </div>
                         </div>

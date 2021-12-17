@@ -33,14 +33,14 @@ export default function Navbar() {
         if (consulta.exists()) {
             actions.getPerfilUser(consulta.data())
         } else {
-            setDoc(refInfo, {datos:false})
+            setDoc(refInfo, { nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" })
             const consulta = await getDoc(refInfo);
             actions.getPerfilUser(consulta.data())
         }
     }
 
     useEffect(() => {
-        const unsuscibe = onAuthStateChanged(auth, (usuarioFirebase) => {
+        const autenticando = onAuthStateChanged(auth, (usuarioFirebase) => {
             if (usuarioFirebase) {
                 setlogueado(true);
                 actions.login(usuarioFirebase);
@@ -49,7 +49,7 @@ export default function Navbar() {
             }
         })
         return () => {
-            unsuscibe()
+            autenticando()
         }
     }, [])
 
@@ -85,7 +85,6 @@ export default function Navbar() {
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
                     <div className="collapse navbar-collapse" />
-                    {/* <a className="nav-link closeButton" onClick={()=>salir()} style={{ display: logueado? "inline" : "none" }}>cerrar sesión</a> */}
                     {logueado && <a className="nav-link closeButton" onClick={() => salir()}>cerrar sesión</a>}
                 </div>
             </div>
