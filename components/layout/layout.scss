@@ -1,14 +1,5 @@
-.Pagina{
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-.Contenido{
-    background: #ffffff;
-    height: calc(100vh - 103px);
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar{
-        display: none;
-    }
+.Pagina {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }

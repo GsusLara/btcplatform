@@ -10,6 +10,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useRouter } from 'next/router'
 import { db } from "../../store/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 export default function Navbar() {
@@ -54,7 +55,7 @@ export default function Navbar() {
     }, [])
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg fixed-top">
             <div className="container">
                 <Link href="/">
                     <a className="navbar-brand" >
@@ -63,7 +64,7 @@ export default function Navbar() {
                     </a>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                <FontAwesomeIcon icon={["fas", "bars"]} className="fs-2" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
@@ -85,7 +86,7 @@ export default function Navbar() {
                         <a className="nav-link" href="#">Acerca de</a>
                     </div>
                     <div className="collapse navbar-collapse" />
-                    {logueado && <a className="nav-link closeButton" onClick={() => salir()}>cerrar sesión</a>}
+                    {logueado && <a className="nav-link closeButton " onClick={() => salir()}>cerrar sesión</a>}
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>

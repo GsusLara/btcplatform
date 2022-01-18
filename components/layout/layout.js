@@ -6,10 +6,8 @@ export default function Layout(props) {
     return (
         <div className="container-fluid Pagina">
             <Navbar/>
-            <div className="container Contenido">
                 {children}
-            </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     )
 }
