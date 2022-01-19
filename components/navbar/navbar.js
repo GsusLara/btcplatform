@@ -55,7 +55,7 @@ export default function Navbar() {
     }, [])
 
     return (
-        <nav className="navbar navbar-expand-lg fixed-top">
+        <nav className="navbar navbar-expand-lg fixed-top bg-dark">
             <div className="container">
                 <Link href="/">
                     <a className="navbar-brand" >
@@ -63,30 +63,34 @@ export default function Navbar() {
                         <span className="m-2 company">CostaRica Bitcoin</span>
                     </a>
                 </Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <FontAwesomeIcon icon={["fas", "bars"]} className="fs-2" />
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <FontAwesomeIcon icon={["fas", "bars"]} className="fs-2" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
+                    <div className="navbar-nav ms-md-auto">
                         {logueado ?
                             <>
                                 <Link href="/Cuenta">
-                                    <a className="nav-link" aria-current="page">Mi cuenta</a>
+                                    <a className="nav-link" aria-current="page"> <FontAwesomeIcon icon={["far", "user"]} className="me-2" />Mi cuenta</a>
                                 </Link>
                                 <Link href="/Collect">
-                                    <a className="nav-link" >Vender BTC</a>
+                                    <a className="nav-link"><FontAwesomeIcon icon={["fas", "wallet"]} className="me-2"/>Exchange</a>
                                 </Link>
-                                <a className="nav-link" href="#">Comprar BTC</a>
                                 <Link href="/Market">
-                                    <a className="nav-link" >Mercado</a>
+                                    <a className="nav-link" ><FontAwesomeIcon icon={["fas", "chart-line"]} className="me-2"/>Mercado</a>
                                 </Link>
                             </> :
-                            <a className="nav-link loginButton" onClick={handleShow} >Iniciar sesión</a>
+                            <a className="nav-link loginButton" onClick={handleShow} ><FontAwesomeIcon icon={["fas", "users"]} className="me-2"/>Ingresar / Registrarse</a>
                         }
-                        <a className="nav-link" href="#">Acerca de</a>
+                        {logueado && <a className="nav-link closeButton " onClick={() => salir()}><FontAwesomeIcon icon={["fas", "sign-out-alt"]} className="me-2"/>Cerrar sesión</a>}
                     </div>
-                    <div className="collapse navbar-collapse" />
-                    {logueado && <a className="nav-link closeButton " onClick={() => salir()}>cerrar sesión</a>}
                 </div>
             </div>
             <Modal show={show} onHide={handleClose}>
