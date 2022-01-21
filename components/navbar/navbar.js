@@ -3,7 +3,6 @@ import { Context } from "../../store/appContext";
 import Image from 'next/image'
 import Link from "next/link"
 import logo from "../../public/btclogo.svg"
-import { Modal } from "react-bootstrap";
 import Login from '../login';
 import { auth } from "../../store/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth"
@@ -11,15 +10,14 @@ import { useRouter } from 'next/router'
 import { db } from "../../store/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link as LinkScroll } from "react-scroll"
 
 
 export default function Navbar() {
     const { actions } = useContext(Context);
     const { push } = useRouter();
     const [logueado, setlogueado] = useState(false);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
 
     const salir = () => {
         signOut(auth);
@@ -46,7 +44,6 @@ export default function Navbar() {
                 setlogueado(true);
                 actions.login(usuarioFirebase);
                 accesoInfo(usuarioFirebase.uid);
-                setShow(false);
             }
         })
         return () => {
@@ -55,7 +52,7 @@ export default function Navbar() {
     }, [])
 
     return (
-        <nav className="navbar navbar-expand-lg fixed-top bg-dark">
+        <nav className="navbar navbar-expand-lg  bg-dark">
             <div className="container">
                 <Link href="/">
                     <a className="navbar-brand" >
@@ -74,30 +71,48 @@ export default function Navbar() {
                     <FontAwesomeIcon icon={["fas", "bars"]} className="fs-2" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav ms-md-auto">
+                    <ul className="navbar-nav  mb-2 mb-lg-0 ms-md-auto">
+                        <li>
+                            <LinkScroll to="middle" smooth={true}>
+                                <span className="nav-link" ><FontAwesomeIcon icon={["fas", "shopping-bag"]} className="me-2" />comprar</span>
+                            </LinkScroll>
+                        </li>
+                        <li>
+                            <Link href="/Market">
+                                <a className="nav-link" ><FontAwesomeIcon icon={["fas", "chart-line"]} className="me-2" />Mercado</a>
+                            </Link>
+                        </li>
                         {logueado ?
                             <>
-                                <Link href="/Cuenta">
-                                    <a className="nav-link" aria-current="page"> <FontAwesomeIcon icon={["far", "user"]} className="me-2" />Mi cuenta</a>
-                                </Link>
-                                <Link href="/Collect">
-                                    <a className="nav-link"><FontAwesomeIcon icon={["fas", "wallet"]} className="me-2"/>Exchange</a>
-                                </Link>
-                                <Link href="/Market">
-                                    <a className="nav-link" ><FontAwesomeIcon icon={["fas", "chart-line"]} className="me-2"/>Mercado</a>
-                                </Link>
+                                <li>
+                                    <Link href="/Cuenta">
+                                        <a className="nav-link" aria-current="page"> <FontAwesomeIcon icon={["far", "user"]} className="me-2" />Mi cuenta</a>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/Collect">
+                                        <a className="nav-link"><FontAwesomeIcon icon={["fas", "wallet"]} className="me-2" />Exchange</a>
+                                    </Link>
+                                </li>
                             </> :
-                            <a className="nav-link loginButton" onClick={handleShow} ><FontAwesomeIcon icon={["fas", "users"]} className="me-2"/>Ingresar / Registrarse</a>
+                            <li>
+                                <a className="nav-link loginButton" data-bs-toggle="modal" data-bs-target="#exampleModal" ><FontAwesomeIcon icon={["fas", "users"]} className="me-2" /><span>unete</span></a>
+                            </li>
                         }
-                        {logueado && <a className="nav-link closeButton " onClick={() => salir()}><FontAwesomeIcon icon={["fas", "sign-out-alt"]} className="me-2"/>Cerrar sesión</a>}
+                        <li>
+                            {logueado && <a className="nav-link closeButton " onClick={() => salir()}><FontAwesomeIcon icon={["fas", "sign-out-alt"]} className="me-2" />Cerrar sesión</a>}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content bg-dark">
+                        <button type="button" className="btn-close ms-auto m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <Login />
                     </div>
                 </div>
             </div>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton />
-                <Login />
-            </Modal>
         </nav>
     )
 }
-

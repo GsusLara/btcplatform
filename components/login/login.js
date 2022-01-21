@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithR
 
 export default function Login() {
     const googleProvider = new GoogleAuthProvider();
-    const [conCuenta, setconCuenta] = useState(true);
+    const [conCuenta, setconCuenta] = useState(false);
     const [credentials, setcredentials] = useState({ email: "", password: "", password2: "" });
     const revisionEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const changeUser = (e) => {
@@ -45,16 +45,10 @@ export default function Login() {
     }
 
     return (
-        <div className="bg-light text-center">
+        <div className="bg-dark text-center login-box">
             <article className="card-body mx-auto" style={{ maxWidth: "400px" }}>
-                <h4 className="card-title text-center fs-3">{conCuenta ? "Iniciar sesión" : "Crear cuenta"}</h4>
-                <div className="d-grid gap-2 mt-4">
-                    <button className="btn btn-danger" onClick={() => signInWithRedirect(auth, googleProvider)}> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Utiliza tu cuenta de Google</button>
-                </div>
-                <p className="divider-text mt-3">
-                    <span className="bg-light">ó</span>
-                </p>
-                <div>
+                <span className="title-login text-center fs-3 login-box">{conCuenta ? "Iniciar sesión" : "Registrate como socio vendedor"}</span>
+                <div className="mt-5">
                     <form >
                         <div className="input-group mb-3">
                             <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "envelope"]} /></span>
@@ -110,11 +104,17 @@ export default function Login() {
                     <div>
                         <button className="btn btn-primary mt-2 mb-3" onClick={() => verificar()}> {conCuenta ? "ingresar" : "Registrarme"}</button>
                     </div>
-                    {conCuenta ?
-                        <p>Registrate {" "}<a className="text-primary loginButton" onClick={() => setconCuenta(false)}>aqui</a> </p> :
-                        <p>tienes cuenta? <a className="text-primary loginButton" onClick={() => setconCuenta(true)}>Iniciar sesión</a> </p>
-                    }
-
+                    <p className="divider-text mt-2">
+                        <span className="bg-dark">ó</span>
+                    </p>
+                    <div className="d-grid gap-2 mt-2">
+                        <button className="btn btn-danger" onClick={() => signInWithRedirect(auth, googleProvider)}> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Utiliza tu cuenta de Google</button>
+                    </div>
+                    <div className="mt-3">
+                        {conCuenta ?
+                            <p>Registrate {" "}<a className="text-primary loginButton" onClick={() => setconCuenta(false)}>aqui</a> </p> :
+                            <p>tienes cuenta? <a className="text-primary loginButton" onClick={() => setconCuenta(true)}>Iniciar sesión</a> </p>}
+                    </div>
                 </div>
             </article>
         </div>
