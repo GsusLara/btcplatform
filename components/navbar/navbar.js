@@ -73,9 +73,18 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul className="navbar-nav  mb-2 mb-lg-0 ms-md-auto">
                         <li>
-                            <LinkScroll to="middle" smooth={true}>
-                                <span className="nav-link" ><FontAwesomeIcon icon={["fas", "shopping-bag"]} className="me-2" />comprar</span>
-                            </LinkScroll>
+                            <Link href="/">
+                                <LinkScroll to="buybox" smooth={true}>
+                                    <span className="nav-link" ><FontAwesomeIcon icon={["fas", "shopping-bag"]} className="me-2" />comprar</span>
+                                </LinkScroll>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/">
+                                <LinkScroll to="sellbox" smooth={true}>
+                                    <span className="nav-link"><FontAwesomeIcon icon={["fas", "wallet"]} className="me-2" />Vender</span>
+                                </LinkScroll>
+                            </Link>
                         </li>
                         <li>
                             <Link href="/Market">
@@ -87,11 +96,6 @@ export default function Navbar() {
                                 <li>
                                     <Link href="/Cuenta">
                                         <a className="nav-link" aria-current="page"> <FontAwesomeIcon icon={["far", "user"]} className="me-2" />Mi cuenta</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/Collect">
-                                        <a className="nav-link"><FontAwesomeIcon icon={["fas", "wallet"]} className="me-2" />Exchange</a>
                                     </Link>
                                 </li>
                             </> :
