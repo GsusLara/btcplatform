@@ -1,7 +1,5 @@
 import { useContext } from "react"
 import { Context } from "../../store/appContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from "react-scroll"
 import CobrarComponent from "../cobrarComponent";
 
 export default function Inicio() {
@@ -17,9 +15,9 @@ export default function Inicio() {
                             <span className="fs-3 subtitle">Compre y venda Bitcoin de forma rapida y segura </span>
                         </div>
 
-                        <div className="col-2 text-center position-absolute bottom-0 pb-5">
+                        {/* <div className="col-2 text-center position-absolute bottom-0 pb-5">
                             <FontAwesomeIcon icon={["fas", "chevron-down"]} className="fs-1 down" />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

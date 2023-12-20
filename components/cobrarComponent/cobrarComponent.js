@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { CopyToClipboard } from "react-copy-to-clipboard"
 import Link from "next/link"
 
 export default function CobrarComponent() {
@@ -64,8 +63,7 @@ const Confirmar = (props) => {
                 <p className="mt-5">El cambio de bitcoin tiene un plazo de acreditación de hasta 24 horas para su verificacion segun la disponibilidad de la red</p>
 
                 <button type="button" className="btn btn-warning d-grid mx-auto m-3" onClick={() => pagar()}>Cambiar ahora</button>
-                <Link href="/">
-                    <a type="button" className="btn btn-danger" >salir</a>
+                <Link href="/"type="button" className="btn btn-danger" >salir
                 </Link>
             </div>
         </div>
@@ -92,7 +90,8 @@ const Tiquet = (props) => {
                             <span>{direccion}</span>
                         </div>
                         <CopyToClipboard text={direccion}>
-                            <FontAwesomeIcon icon={["fas", "copy"]} className="clipboard position-absolute top-0 end-0" />
+                            {/* <FontAwesomeIcon icon={["fas", "copy"]} className="clipboard position-absolute top-0 end-0" /> */}
+                            copy
                         </CopyToClipboard>
                     </div>
                 </div>
@@ -100,8 +99,7 @@ const Tiquet = (props) => {
                     <span className="spinner-border m-2 align-middle spinner" role="status" />
                     <strong>Esperando la confirmación en la red</strong>
                 </div>
-                <Link href="/">
-                    <a type="button" className="btn btn-danger mt-3" onClick={() => limpiarPago()}>Cancelar</a>
+                <Link href="/"type="button" className="btn btn-danger mt-3" onClick={() => limpiarPago()}>Cancelar
                 </Link>
             </div>
         </div>
@@ -122,8 +120,7 @@ const Pagado = (props) => {
                     <h5>Se enviarán a tu cuenta bancaria</h5>
                     ₡ {Math.trunc(monto * store.tcBtc)} colones
                 </div>
-                <Link href="/">
-                    <a type="button" className="btn btn-primary mt-5" onClick={() => limpiarPago()}>salir</a>
+                <Link href="/"type="button" className="btn btn-primary mt-5" onClick={() => limpiarPago()}>salir
                 </Link>
             </div>
         </div>

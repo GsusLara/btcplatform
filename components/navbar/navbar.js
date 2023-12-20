@@ -9,8 +9,6 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useRouter } from 'next/router'
 import { db } from "../../store/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link as LinkScroll } from "react-scroll"
 
 
 export default function Navbar() {
@@ -54,11 +52,9 @@ export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg  bg-dark">
             <div className="container">
-                <Link href="/">
-                    <a className="navbar-brand" >
-                        <Image src={logo} alt="logo bootstrap" width="30" height="30" className="d-inline-block" />
-                        <span className="m-2 company">CostaRica Bitcoin</span>
-                    </a>
+                <Link href="/" className="navbar-brand" >
+                    <Image src={logo} alt="logo bootstrap" width="30" height="30" className="d-inline-block" />
+                    <span className="m-2 company">CostaRica Bitcoin</span>
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -68,43 +64,40 @@ export default function Navbar() {
                     aria-controls="navbarNavAltMarkup"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <FontAwesomeIcon icon={["fas", "bars"]} className="fs-2" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul className="navbar-nav  mb-2 mb-lg-0 ms-md-auto">
                         <li>
                             <Link href="/">
-                                <LinkScroll to="buybox" smooth={true}>
-                                    <span className="nav-link" ><FontAwesomeIcon icon={["fas", "shopping-bag"]} className="me-2" />comprar</span>
-                                </LinkScroll>
+                                {/* <LinkScroll to="buybox" smooth={true}>
+                                    <span className="nav-link" >comprar</span>
+                                </LinkScroll> */}
                             </Link>
                         </li>
                         <li>
                             <Link href="/">
-                                <LinkScroll to="sellbox" smooth={true}>
-                                    <span className="nav-link"><FontAwesomeIcon icon={["fas", "wallet"]} className="me-2" />Vender</span>
-                                </LinkScroll>
+                                {/* <LinkScroll to="sellbox" smooth={true}>
+                                    <span className="nav-link">Vender</span>
+                                </LinkScroll> */}
                             </Link>
                         </li>
                         <li>
-                            <Link href="/Market">
-                                <a className="nav-link" ><FontAwesomeIcon icon={["fas", "chart-line"]} className="me-2" />Mercado</a>
+                            <Link href="/Market" className="nav-link" >Mercado
                             </Link>
                         </li>
                         {logueado ?
                             <>
                                 <li>
-                                    <Link href="/Cuenta">
-                                        <a className="nav-link" aria-current="page"> <FontAwesomeIcon icon={["far", "user"]} className="me-2" />Mi cuenta</a>
+                                    <Link href="/Cuenta" className="nav-link" aria-current="page"> Mi cuenta
                                     </Link>
                                 </li>
                             </> :
                             <li>
-                                <a className="nav-link loginButton" data-bs-toggle="modal" data-bs-target="#exampleModal" ><FontAwesomeIcon icon={["fas", "users"]} className="me-2" /><span>unete</span></a>
+                                <a className="nav-link loginButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span>unete</span></a>
                             </li>
                         }
                         <li>
-                            {logueado && <a className="nav-link closeButton " onClick={() => salir()}><FontAwesomeIcon icon={["fas", "sign-out-alt"]} className="me-2" />Cerrar sesión</a>}
+                            {logueado && <a className="nav-link closeButton " onClick={() => salir()}>Cerrar sesión</a>}
                         </li>
                     </ul>
                 </div>

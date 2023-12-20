@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth } from "../../store/firebaseConfig"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithRedirect, GoogleAuthProvider } from "firebase/auth"
 
@@ -51,7 +50,7 @@ export default function Login() {
                 <div className="mt-5">
                     <form >
                         <div className="input-group mb-3">
-                            <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "envelope"]} /></span>
+                            {/* <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "envelope"]} /></span> */}
                             <input
                                 name="email"
                                 type="email"
@@ -67,7 +66,7 @@ export default function Login() {
                             />
                         </div>
                         <div className="input-group mb-3">
-                            <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "lock"]} /></span>
+                            {/* <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "lock"]} /></span> */}
                             <input
                                 name="password"
                                 type="password"
@@ -84,7 +83,7 @@ export default function Login() {
                         </div>
                         <div style={{ display: conCuenta ? "none" : "block" }}>
                             <div className="input-group mb-3">
-                                <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "lock"]} /></span>
+                                {/* <span className="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={["fa", "lock"]} /></span> */}
                                 <input
                                     name="password2"
                                     type="password"
@@ -108,7 +107,7 @@ export default function Login() {
                         <span className="bg-dark">ó</span>
                     </p>
                     <div className="d-grid gap-2 mt-2">
-                        <button className="btn btn-danger" onClick={() => signInWithRedirect(auth, googleProvider)}> <FontAwesomeIcon icon={["fab", "google"]} /> &nbsp; Utiliza tu cuenta de Google</button>
+                        <button className="btn btn-danger" onClick={() => signInWithRedirect(auth, googleProvider)}>  &nbsp; Utiliza tu cuenta de Google</button>
                     </div>
                     <div className="mt-3">
                         {conCuenta ?
