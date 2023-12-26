@@ -1,17 +1,14 @@
 .boxheader{
     background-image: 
         linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
+            rgba(0, 0, 0, 0.685),
+            rgba(0, 0, 0, 0.585)
     ),url(../../public/btcWall.jpg);
-    height: 100vh;
+    height: calc(100vh - 100px);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: 60%;
     color:#ffffff
-}
-.zona2{
-    height: 100vh;
 }
 .title{
     font-family: 'Oxygen', sans-serif;
@@ -19,12 +16,25 @@
 .subtitle{
     font-family: 'Barlow Condensed', sans-serif;
 }
-.down{
-    color:rgba(255, 255, 255, 0.24);
-}
-.detalles{
-    background: transparent;
-    border: none;
-    color:#ffffff;
-    font-family: 'Barlow Condensed', sans-serif;
-}
+
+.botones-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .botones-container button {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: bold;
+  
+    &.btn-primary {
+      background-color: #007bff;
+    }
+  
+    &.btn-success {
+      background-color: #28a745;
+    }
+  }
