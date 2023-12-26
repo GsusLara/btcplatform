@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			fecha: "",
-			tcBtc: 0,
+			BtcColon: 0,
+			BtcDolar:0,
 			user: false,
 			perfilUser:[{ nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" }]
 		},
@@ -42,7 +43,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					throw e;
 				}
 				setStore({ fecha: dolar.fecha });
-				setStore({ tcBtc: dolar.compra * btc.bitcoin.usd });
+				setStore({BtcDolar: btc.bitcoin.usd})
+				setStore({ BtcColon: dolar.compra * btc.bitcoin.usd });
 			},
 			login: (data) => {
 				const { email, photoURL, uid } = data
