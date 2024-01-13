@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { Context } from "../../store/appContext";
 import Image from 'next/image'
 import Link from "next/link"
-import logo from "../../public/btclogo.svg"
+import logo from "../../assets/btclogo.svg"
 import Login from '../login';
 import { auth } from "../../store/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth"
@@ -82,7 +82,7 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/Market" className="nav-link" >Mercado
+                            <Link href="/Market" className="nav-link" >TradingView
                             </Link>
                         </li>
                         {logueado ?
