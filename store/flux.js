@@ -1,16 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			ventaBTC: 0,
-			compraBTC: 0,
 			ventaUSD: 0,
-			compraUSD: 0,
 			user: false,
 			perfilUser: [{ nombre: "", apellidos: "", cedula: "", banco: "", cuenta: "", nombreCuenta: "" }]
 		},
 		actions: {
 			updateTC: async () => {
-
 				try {
 					const respApiUSD = await fetch("https://tipodecambio.paginasweb.cr/api", {
 						method: 'GET',
@@ -22,20 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					}
 					const dataDolar = await respApiUSD.json();
-					setStore({ ventaUSD: dataDolar.venta });
-					setStore({ compraUSD: dataDolar.compra });
-				} catch (error) {
-					console.error('Error:', error.message);
-				}
-
-				try {
-					const respApiBTC = await fetch("https://api.blockchain.com/v3/exchange/l2/BTC-USD");
-					if (!respApiBTC.ok) {
-						throw new Error(`Error en la solicitud: ${respApiBTC.status} ${respApiBTC.statusText}`);
-					}
-					const dataBTC = await respApiBTC.json();
-					setStore({ ventaBTC: dataBTC.asks[0].px })
-					setStore({ compraBTC: dataBTC.bids[0].px });
+					let ventaUSD = parseFloat(dataDolar.venta).toFixed(2)
+					setStore({ ventaUSD});
 				} catch (error) {
 					console.error('Error:', error.message);
 				}
