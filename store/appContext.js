@@ -17,7 +17,7 @@ const injectContext = PassedComponent => {
 			})
 		);
 		useEffect(() => {
-			state.actions.updateCambios();
+			state.actions.updateTC();
 		}, []);
         return (
 			<Context.Provider value={state}>

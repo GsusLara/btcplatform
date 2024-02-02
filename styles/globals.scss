@@ -1,12 +1,11 @@
-@import "~bootstrap/scss/bootstrap";
-@import "../components/layout/layout.scss";
-@import "../components/inicio/inicio.scss";
-@import "../components/navbar/navbar.scss";
-@import "../components/cobrarComponent/cobrarComponent.scss";
-@import "../components/marketComponent/marketComponent.scss";
-@import "../components/login/login.scss";
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&family=Oxygen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100&family=Inconsolata:wght@200&display=swap');
+@import "~bootstrap/scss/bootstrap";
+@import "./index.scss";
+@import "./navbar.scss";
+@import "./exchange.scss";
+@import "../components/login/login.scss";
+
 html,
 body {
   padding: 0;
@@ -14,4 +13,13 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+.Pagina {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.pBox {
+  height: calc(100vh - 100px);
 }

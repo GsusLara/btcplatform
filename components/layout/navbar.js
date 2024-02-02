@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { Context } from "../../store/appContext";
 import Image from 'next/image'
 import Link from "next/link"
-import logo from "../../public/btclogo.svg"
+import logo from "../../assets/btclogo.svg"
 import Login from '../login';
 import { auth } from "../../store/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth"
@@ -68,32 +68,22 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul className="navbar-nav  mb-2 mb-lg-0 ms-md-auto">
                         <li>
-                            <Link href="/">
-                                {/* <LinkScroll to="buybox" smooth={true}>
-                                    <span className="nav-link" >comprar</span>
-                                </LinkScroll> */}
+                            <Link href="/Exchange"className="nav-link" >Compra/Vende
                             </Link>
                         </li>
                         <li>
-                            <Link href="/">
-                                {/* <LinkScroll to="sellbox" smooth={true}>
-                                    <span className="nav-link">Vender</span>
-                                </LinkScroll> */}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/Market" className="nav-link" >Mercado
+                            <Link href="/Market" className="nav-link" >TradingView
                             </Link>
                         </li>
                         {logueado ?
                             <>
                                 <li>
-                                    <Link href="/Cuenta" className="nav-link" aria-current="page"> Mi cuenta
+                                    <Link href="/Cuenta" className="nav-link" aria-current="page"> Mi perfil
                                     </Link>
                                 </li>
                             </> :
                             <li>
-                                <a className="nav-link loginButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span>unete</span></a>
+                                <a className="nav-link loginButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span>Registrate</span></a>
                             </li>
                         }
                         <li>
